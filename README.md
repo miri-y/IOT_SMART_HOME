@@ -90,7 +90,7 @@ Ensure you have the following installed:
 This project was developed as part of an **IoT course**.  
 
 📧 **Emails:**  
-- **Miriam Yakobson** - [miriamyakobson200021@gmail.com](mailto:miriamyakobson200021@gmail.com)  
+- **Miri Yakobson** - [miriamyakobson200021@gmail.com](mailto:miriamyakobson200021@gmail.com)  
 - **Liat Simhaev** - [liat191103@gmail.com](mailto:liat191103@gmail.com)  
 
 📂 **GitHub Repository:**  
