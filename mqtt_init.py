@@ -3,13 +3,13 @@ import socket
 nb=1 # 0- HIT-"139.162.222.115", 1 - open HiveMQ - broker.hivemq.com
 brokers=[str(socket.gethostbyname('vmm1.saaintertrade.com')), str(socket.gethostbyname('broker.hivemq.com'))]
 ports=['80','1883','8884']
-usernames = ['MATZI',''] # should be modified for HIT
-passwords = ['MATZI',''] # should be modified for HIT
+usernames = ['MATZI',''] 
+passwords = ['MATZI',''] 
 broker_ip=brokers[nb]
 port=ports[nb]
 username = usernames[nb]
 password = passwords[nb]
-conn_time = 0 # 0 stands for endless
+conn_time = 0 
 mzs=['matzi/','']
 sub_topics = ['FEEDME', '#']
 pub_topics = [mzs[nb] + 'FEEDME', 'FEEDME']
