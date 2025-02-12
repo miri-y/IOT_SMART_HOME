@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import QTimer
 import paho.mqtt.client as mqtt
-from mqtt_init import *  # Import MQTT broker settings
+from mqtt_init import *  
 
 DB_FILE = "iot_data.db"
 
@@ -18,7 +18,7 @@ class MqttClient():
         self.client.username_pw_set(username, password)
         self.client.connect(broker_ip, int(broker_port))
         self.client.loop_start()
-        self.gui = gui  # Reference to GUI to update status
+        self.gui = gui  
 
     def on_connect(self, client, userdata, flags, rc):
         if rc == 0:
@@ -52,12 +52,10 @@ class MainGUI(QMainWindow):
         self.setGeometry(100, 100, 900, 600)
         self.mqtt_client = MqttClient(self)
 
-        # Layout and widgets
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
         self.layout = QVBoxLayout()
 
-        # Status labels
         self.relay_status = QLabel("Relay Status: OFF", self)
         self.relay_status.setStyleSheet("font-size: 16px; color: red;")
         self.layout.addWidget(self.relay_status)
@@ -66,24 +64,21 @@ class MainGUI(QMainWindow):
         self.alert_status.setStyleSheet("font-size: 16px; color: blue;")
         self.layout.addWidget(self.alert_status)
 
-        # Table for data display
         self.table = QTableWidget()
         self.table.setColumnCount(3)
         self.table.setHorizontalHeaderLabels(["Timestamp", "Topic", "Message"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.layout.addWidget(self.table)
 
-        # Buttons
         self.refresh_button = QPushButton("Refresh Data")
         self.refresh_button.clicked.connect(self.load_data)
         self.layout.addWidget(self.refresh_button)
 
         self.central_widget.setLayout(self.layout)
 
-        # Load data periodically
         self.timer = QTimer()
         self.timer.timeout.connect(self.load_data)
-        self.timer.start(5000)  # Update every 5 seconds
+        self.timer.start(2000)  
 
         self.load_data()
 
