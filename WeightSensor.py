@@ -6,15 +6,14 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import paho.mqtt.client as mqtt
-from mqtt_init import *  # Import MQTT broker settings
+from mqtt_init import *  
 
-# Creating Client name - should be unique
 global clientname, CONNECTED
 CONNECTED = False
 r = random.randrange(1, 10000000)
 clientname = "IOT_client-Id234-" + str(r)
 DHT_topic = pub_topics[0]  
-update_rate = 5000  # in milliseconds
+update_rate = 5000  
 
 class Mqtt_client():
     def __init__(self):
@@ -83,7 +82,7 @@ class MainWindow(QMainWindow):
         self.label_status.setStyleSheet("font-size: 14px; color: gray;")
 
     def update_data(self):
-        weight = random.randint(0, 50)  # Simulate weight measurement
+        weight = random.randint(0, 50)  
         current_data = f'Weight: {weight} grams'
         print(f"Publishing weight: {current_data}")
         self.mc.publish_to(DHT_topic, current_data)
