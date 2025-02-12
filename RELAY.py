@@ -32,7 +32,7 @@ class Mqtt_client():
 
     def start_listening(self):
         self.client.loop_start()
-        for topic in RELAY_topics:  # Subscribe to all topics
+        for topic in RELAY_topics:
             self.client.subscribe(topic)
             print(f"Subscribed to topic: {topic}")
 
@@ -61,25 +61,22 @@ class Mqtt_client():
         message = str(msg.payload.decode("utf-8", "ignore"))
         print(f"Message received on {topic}: {message}")
 
-        # הודעה מחיישן המשקל
         if topic == pub_topics[0] and "Weight:" in message:
             try:
-                weight = int(message.split(":")[1].split()[0])  # חילוץ ערך המשקל
+                weight = int(message.split(":")[1].split()[0])  
                 print(f"Weight received: {weight} grams")
 
-                # עדכון סטטוס לפי משקל
                 if weight < 10:
-                    if mainwin.status_label.text() != "Relay Status: ON":  # בדיקה אם יש שינוי
+                    if mainwin.status_label.text() != "Relay Status: ON":  
                         print("Activating relay due to low weight")
                         mainwin.update_ui_on(weight)
                 else:
-                    if mainwin.status_label.text() != "Relay Status: OFF":  # בדיקה אם יש שינוי
+                    if mainwin.status_label.text() != "Relay Status: OFF":  
                         print("Deactivating relay - weight sufficient")
                         mainwin.update_ui_off()
             except ValueError:
                 print("Error parsing weight from message")
 
-        # הודעה מה-BUTTON
         elif topic == pub_topics[1] and "Manual feeding triggered" in message:
             print("Activating relay due to manual feeding")
             mainwin.update_ui_on(None)
@@ -97,7 +94,6 @@ class MainWindow(QMainWindow):
         self.setGeometry(100, 100, 400, 200)
         self.setWindowTitle('RELAY Controller')
 
-        # Add a visual indicator (label)
         self.status_label = QLabel("Relay Status: OFF", self)
         self.status_label.setGeometry(100, 80, 200, 40)
         self.status_label.setStyleSheet("background-color: red; color: white; font-size: 16px; text-align: center;")
