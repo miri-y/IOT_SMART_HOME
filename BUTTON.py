@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import *
 import paho.mqtt.client as mqtt
 from mqtt_init import *
 
-# Creating Client name - should be unique
 global clientname, CONNECTED
 CONNECTED = False
 r = random.randrange(1, 10000000)
